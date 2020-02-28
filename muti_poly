@@ -1,0 +1,283 @@
+m=int(input())
+poly_1={}
+while m>0:
+    a=input()
+    pi,ci=a.split(' ')
+    pi,ci=int(pi),int(ci)
+    if pi in poly_1:
+        poly_1.update({int(pi):poly_1[pi]+int(ci)})
+    else:    
+        poly_1.update({int(pi):int(ci)})
+    m=m-1
+print(poly_1)
+#poly_1=sorted(poly_1.items(),key=lambda x:x[0],reverse=True)
+#print(poly_1)
+
+n=int(input())
+poly_2={}
+while n>0:
+    b=input()
+    pj,cj=b.split(' ')
+    pj,cj =int(pj),int(cj)
+    if pj in poly_2:
+        poly_2.update({int(pj):poly_2[pj]+int(cj)})
+    else:    
+        poly_2.update({int(pj):int(cj)})
+    n=n-1
+print(poly_2)
+#poly_2=sorted(poly_2.items(),key=lambda x:x[0],reverse=True)
+#print(poly_2)
+
+multi={}
+for i in poly_2:
+    j=0
+    for j in poly_1:
+        key=i+j
+        value=poly_1[j]*poly_2[i]
+        if key in multi:
+            multi.update({key:multi[key]+value})
+        else:
+            key=i+j
+            multi.update({key:value})
+            
+print(multi)
+multi=sorted(multi.items(),key=lambda x:x[0],reverse=True)
+print(multi)
+c=0
+dic={}
+for k,v in multi:
+    if v!=0:
+        dic.update({k:v})
+
+if len(dic)==0:
+    print("0")
+else:
+    c=0
+    for k,v in dic.items():
+        if k==0 and c<1:
+            c=c+1
+            if v>0:
+                print(str(v),end="")
+            else:
+                print('-'+str(abs(v)),end="")
+        elif k==0:
+            if v>0:
+                print(' + '+str(v),end="")
+            else:
+                print(' - '+str(abs(v)),end="")
+           
+        elif k==1 and c<1:
+            c=c+1
+            if v>0:
+                if v==1:
+                    print('x',end="")
+                else:
+                    print(str(v)+'x',end="")
+            else:
+                if str(v)== '-1':
+                    print(' - '+'x',end="")
+                else:
+                    print('-'+str(abs(v))+'x',end="")
+        elif k==1:
+            if v>0:
+                if v==1:
+                    print(' + '+'x',end="")
+                else:
+                    print(' + '+str(v)+'x',end="")
+            else:
+                if str(v)== '-1':
+                    print(' - '+'x',end="")
+                else:
+                    print('-'+str(abs(v))+'x',end="")
+    
+        elif k>1 and c<1:
+            c=c+1
+            if v>0:
+                if v==1:
+                    print('x^'+str(k),end="")
+                else:
+                    print(str(v)+'x^'+str(k),end="")
+            else:
+                if str(v)== '-1':
+                    print('-'+'x^'+str(k),end="")
+                else:
+                    print('-'+str(abs(v))+'x^'+str(k),end="")
+        elif  k>1:
+            if v>0:
+                if v==1:
+                    print(' + '+'x^'+str(k),end="")
+                else:
+                    print(' + '+str(v)+'x^'+str(k),end="")
+            else:
+                if str(v)== '-1':
+                    print(' - '+'x^'+str(k),end="")
+                else:
+                    print(' - '+str(abs(v))+'x^'+str(k),end="")
+    
+    print()            
+
+        
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+m=int(input())
+poly_1={}
+while m>0:
+    a=input()
+    pi,ci=a.split(' ')
+    pi,ci=int(pi),int(ci)
+    #print(pi,ci)
+    if pi in poly_1:
+        poly_1.update({int(pi):poly_1[pi]+int(ci)})
+    else:    
+        poly_1.update({int(pi):int(ci)})
+    m=m-1
+#print(poly_1)
+n=int(input())
+poly_2={}
+while n>0:
+    b=input()
+    pj,cj=b.split(' ')
+    pj,cj =int(pj),int(cj)
+    if pj in poly_2:
+        poly_2.update({int(pj):poly_2[pj]+int(cj)})
+    else:    
+        poly_2.update({int(pj):int(cj)})
+        #print(poly_2)
+    n=n-1
+#print(poly_2)
+for i in poly_2.keys():
+    if i in poly_1:
+        poly_1.update({i:int(poly_1[i])+int(poly_2[i])})
+    else:
+        poly_1.update({i:int(poly_2[i])})
+#print(poly_1)
+poly_1=sorted(poly_1.items(),key=lambda x:x[0],reverse=True)
+
+#print(poly_1)
+c=0
+new_dic={}
+for k,v in poly_1:
+    if v!=0:
+        new_dic.update({k:v})
+
+if len(new_dic)==0:
+    print("0")
+else:
+    r1=[]
+    for k,v in new_dic.items():
+        r1.append("{}x^{}".format(v,k))
+        #print(r1)
+        r2=(' + ').join(r1)
+        #print(r2)
+        r2=r2.replace('x^0','')
+        #print(r2)
+        r2=r2.replace(' + -',' - ')
+        r2=r2.replace('x^1 ','x ')
+        r2=r2.replace('1x^','x^')
+        r2=r2.replace(' 1x^','x^')
+        r2=r2.replace(' 1x',' x')
+    print(r2)
+"""
+    
+    
+"""    
+    
+    c=0
+    for k,v in dic.items():
+        if k==0 and c<1:
+            c=c+1
+            if v>0:
+                print(str(v),end="")
+            else:
+                print('-'+str(abs(v)),end="")
+        elif k==0:
+            if v>0:
+                print(' + '+str(v),end="")
+            else:
+                print(' - '+str(abs(v)),end="")
+           
+        elif k==1 and c<1:
+            c=c+1
+            if v>0:
+                if v==1:
+                    print('x',end="")
+                else:
+                    print(str(v)+'x',end="")
+            else:
+                if str(v)== '-1':
+                    print(' - '+'x',end="")
+                else:
+                    print('-'+str(abs(v))+'x',end="")
+        elif k==1:
+            if v>0:
+                if v==1:
+                    print(' + '+'x',end="")
+                else:
+                    print(' + '+str(v)+'x',end="")
+            else:
+                if str(v)== '-1':
+                    print(' - '+'x',end="")
+                else:
+                    print('-'+str(abs(v))+'x',end="")
+    
+        elif k>1 and c<1:
+            c=c+1
+            if v>0:
+                if v==1:
+                    print('x^'+str(k),end="")
+                else:
+                    print(str(v)+'x^'+str(k),end="")
+            else:
+                if str(v)== '-1':
+                    print('-'+'x^'+str(k),end="")
+                else:
+                    print('-'+str(abs(v))+'x^'+str(k),end="")
+        elif  k>1:
+            if v>0:
+                if v==1:
+                    print(' + '+'x^'+str(k),end="")
+                else:
+                    print(' + '+str(v)+'x^'+str(k),end="")
+            else:
+                if str(v)== '-1':
+                    print(' - '+'x^'+str(k),end="")
+                else:
+                    print(' - '+str(abs(v))+'x^'+str(k),end="")
+    
+    print()            
+"""
