@@ -1,0 +1,111 @@
+m=int(input())
+#print(n)
+win=[]
+loss=[]
+draw=[]
+while m>0:
+    a=input()
+    t1,t2,result=a.split(';')
+    if result=='win':
+        win.append(t1)
+        if result=='win':
+            loss.append(t2)
+    elif result=='draw':
+        draw.append(t1)
+        draw.append(t2)
+    elif result=='loss':
+        loss.append(t1)
+        if result=='loss':
+            win.append(t2)
+    m=m-1
+#print(win)
+#print(draw)
+#print(loss)
+    
+count_all=[]
+count_all=win+draw+loss
+duplicate=set(win)|set(draw)
+duplicate=set(duplicate)|set(loss)
+duplicate=list(duplicate)
+duplicate.sort(reverse=False)
+table_mp={}
+for i in duplicate:
+    table_mp.update({i:count_all.count(i)})
+#print(table_mp)
+table_win={}
+table_draw={}
+table_loss={}
+for i in duplicate:
+    if i in win:
+        if i in table_win:
+            table_win.update({i:table_win[i]+win.count(i)})
+        else:
+            table_win.update({i:win.count(i)})
+    if i in draw:
+        if i in table_draw:
+            table_draw.update({i:table_draw[i]+draw.count(i)})
+        else:
+            table_draw.update({i:draw.count(i)})
+    if i in loss:
+        if i in table_loss:
+            table_loss.update({i:table_loss[i]+loss.count(i)})
+        else:
+            table_loss.update({i:loss.count(i)})
+table_win=sorted(table_win.items(),key=lambda x:x[0],reverse=False)
+table_draw=sorted(table_draw.items(),key=lambda x:x[0],reverse=False)
+table_loss=sorted(table_loss.items(),key=lambda x:x[0],reverse=False)
+table_win=dict(table_win)
+table_draw=dict(table_draw)
+table_loss=dict(table_loss)
+#print(table_win)
+#print(table_draw)
+#print(table_loss)
+final=[]
+final_result_dic={}
+p1=0
+p2=0
+for i in duplicate:
+    #print(i)
+    if i in table_mp.keys():
+        final.append(table_mp[i])
+    else:
+        final.append(0)
+        
+    if i in table_win.keys():
+        final.append(table_win[i])
+    else:
+        final.append(0)
+
+        
+    if i in table_draw.keys():
+        final.append(table_draw[i])
+    else:
+        final.append(0)
+        
+    if i in table_loss.keys():
+        final.append(table_loss[i])
+    else:
+        final.append(0)
+    if final[1]>0:
+        #print(final[1])
+        p1=final[1]*3
+    if final[2]>0:
+        #print(final[2])
+        p2=final[2]*1
+    points=p1+p2    
+    #print(p1,p2)    
+    final.append(points)
+    points=0
+    p1=0
+    p2=0
+    final_result_dic.update({i:final})
+    final=[]
+final_result_dic=sorted(final_result_dic.items(),key=lambda x:x[0],reverse=False)
+final_result_dic=sorted(final_result_dic,key=lambda x:x[1][-1],reverse=True)
+
+print('{0:<23} '.format('Team')+'| '+'{0:>2} '.format('MP')+'| '+'{0:>2} '.format('W')+'| '+'{0:>2} '.format('D')+'| '+'{0:>2} '.format('L')+'| '+'{0:>2} '.format('P')+'|')
+for k,v in final_result_dic:
+    print('{0:<23} '.format(k)+'| '+'{0:>2} '.format(v[0])+'| '+'{0:>2} '.format(v[1])+'| '+'{0:>2} '.format(v[2])+'| '+'{0:>2} '.format(v[3])+'| '+'{0:>2} '.format(v[4])+'|')
+    
+    
+    
