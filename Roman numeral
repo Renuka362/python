@@ -1,0 +1,32 @@
+no=int(input())
+constant=1
+units_list=[]
+if no<=3000:
+    while no!=0:
+        reminder=no%10
+        no=no//10
+        value=reminder*constant
+        units_list.append(value)
+        constant=constant*10
+units_list.sort(reverse=True)
+dic={1:'I',2:'II',3:'III',4:'IV',5:'V',6:'VI',7:'VII',8:'VIII',9:'IX',10:'X',40:'XL',50:'L',90:'XC',100:'C',400:'CD',500:'D',900:'CM',1000:'M',2000:'MM',3000:'MMM'}
+for i in units_list:
+    if i in dic:
+        print(dic[i],end="")
+    else:
+        if i in range(501,900):
+            roman=i-500
+            w=roman//100
+            print('D'+w*'C',end="")
+        elif i in range(101,500):
+            roman=i-0
+            w=roman//100
+            print(w*'C',end="")
+        elif i in range(51,90):    
+            roman=i-50
+            w=roman//10
+            print('L'+w*'X',end="")
+        elif i in range(11,40):
+            roman=i-0
+            w=roman//10
+            print(w*'X',end="")
